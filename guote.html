@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Quotes Generator</title>
+</head>
+<body>
+
+  <h1>Random Quote</h1>
+  <p id="quote">Click the button to get a quote</p>
+  <p id="author"></p>
+
+  <button onclick="getQuote()">Get Quote</button>
+
+  <script>
+    function getQuote() {
+  fetch("https://api.quotable.io/random")
+    .then(response => response.json())
+    .then(data => {
+      document.getElementById("quote").innerText = `"${data.content}"`;
+      document.getElementById("author").innerText = `- ${data.author}`;
+    })
+    .catch(() => {
+      document.getElementById("quote").innerText = "Oops! Could not load quote.";
+      document.getElementById("author").innerText = "";
+    });
+}
+
+  </script>
+
+
+<style>
+    body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding: 50px;
+}
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+}
+
+</style>
+</body>
+</html>
